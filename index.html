@@ -1,1 +1,425 @@
 
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>জনমত নিউজ</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    background:#f4f4f4;
+    color:#111;
+}
+
+.header{
+    background:#fff;
+    border-bottom:3px solid #111;
+    text-align:center;
+    padding:18px 10px 12px;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo{
+    font-size:38px;
+    font-weight:900;
+    letter-spacing:-2px;
+}
+
+.tagline{
+    font-size:13px;
+    margin-top:5px;
+}
+
+.date{
+    font-size:12px;
+    margin-top:8px;
+    color:#555;
+}
+
+.search-box{
+    padding:12px;
+    background:#111;
+}
+
+.search-box input{
+    width:100%;
+    padding:12px;
+    border:0;
+    border-radius:4px;
+    font-size:15px;
+    outline:none;
+}
+
+.categories{
+    display:flex;
+    overflow-x:auto;
+    background:#fff;
+    border-bottom:1px solid #bbb;
+}
+
+.categories button{
+    flex:0 0 auto;
+    border:0;
+    border-right:1px solid #ddd;
+    background:#fff;
+    padding:12px 17px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.categories button:hover{
+    background:#111;
+    color:#fff;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    padding:12px;
+}
+
+.breaking{
+    background:#111;
+    color:#fff;
+    padding:12px;
+    margin-bottom:12px;
+    font-weight:bold;
+}
+
+.news-card{
+    background:#fff;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    box-shadow:0 2px 5px rgba(0,0,0,.08);
+}
+
+.news-card img{
+    width:100%;
+    height:210px;
+    object-fit:cover;
+    background:#ddd;
+}
+
+.news-content{
+    padding:13px;
+}
+
+.news-category{
+    font-size:12px;
+    font-weight:bold;
+    color:#555;
+    margin-bottom:7px;
+}
+
+.news-title{
+    font-size:21px;
+    line-height:1.4;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.news-text{
+    font-size:14px;
+    line-height:1.6;
+    color:#444;
+}
+
+.news-time{
+    font-size:11px;
+    color:#777;
+    margin-top:10px;
+}
+
+.footer{
+    background:#111;
+    color:#fff;
+    text-align:center;
+    padding:25px 10px;
+    margin-top:20px;
+    line-height:1.8;
+}
+
+.no-result{
+    display:none;
+    background:#fff;
+    padding:30px;
+    text-align:center;
+}
+
+@media(max-width:480px){
+    .logo{
+        font-size:34px;
+    }
+
+    .news-title{
+        font-size:19px;
+    }
+
+    .news-card img{
+        height:190px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">জনমত</div>
+
+    <div class="tagline">
+        সত্য ও নিরপেক্ষ সংবাদের প্রতিশ্রুতি
+    </div>
+
+    <div class="date" id="date"></div>
+
+</header>
+
+<div class="search-box">
+    <input
+        type="text"
+        id="search"
+        placeholder="🔎 সংবাদ খুঁজুন..."
+        onkeyup="searchNews()"
+    >
+</div>
+
+<nav class="categories">
+
+    <button onclick="filterNews('সব')">সব</button>
+    <button onclick="filterNews('জাতীয়')">জাতীয়</button>
+    <button onclick="filterNews('স্থানীয়')">স্থানীয়</button>
+    <button onclick="filterNews('রাজনীতি')">রাজনীতি</button>
+    <button onclick="filterNews('অপরাধ')">অপরাধ</button>
+    <button onclick="filterNews('খেলা')">খেলা</button>
+    <button onclick="filterNews('ভিডিও')">ভিডিও</button>
+
+</nav>
+
+<main class="container">
+
+    <div class="breaking">
+        🔴 সর্বশেষ সংবাদ
+    </div>
+
+    <!-- NEWS 1 -->
+
+    <article class="news-card" data-category="স্থানীয়">
+
+        <img
+        src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=900&q=80"
+        alt="সংবাদ ছবি">
+
+        <div class="news-content">
+
+            <div class="news-category">
+                স্থানীয় সংবাদ
+            </div>
+
+            <div class="news-title">
+                বড়াইগ্রামে জনসাধারণের নানা সমস্যা নিয়ে নতুন উদ্যোগ
+            </div>
+
+            <div class="news-text">
+                এলাকার গুরুত্বপূর্ণ তথ্য ও সংবাদ জানতে চোখ রাখুন
+                জনমত নিউজে।
+            </div>
+
+            <div class="news-time">
+                আজ • জনমত প্রতিনিধি
+            </div>
+
+        </div>
+
+    </article>
+
+
+    <!-- NEWS 2 -->
+
+    <article class="news-card" data-category="জাতীয়">
+
+        <img
+        src="https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?auto=format&fit=crop&w=900&q=80"
+        alt="জাতীয় সংবাদ">
+
+        <div class="news-content">
+
+            <div class="news-category">
+                জাতীয়
+            </div>
+
+            <div class="news-title">
+                দেশের সর্বশেষ গুরুত্বপূর্ণ খবর এক জায়গায়
+            </div>
+
+            <div class="news-text">
+                দেশ ও বিশ্বের গুরুত্বপূর্ণ সংবাদ দ্রুত
+                প্রকাশ করবে জনমত নিউজ।
+            </div>
+
+            <div class="news-time">
+                আজ • জনমত ডেস্ক
+            </div>
+
+        </div>
+
+    </article>
+
+
+    <!-- NEWS 3 -->
+
+    <article class="news-card" data-category="রাজনীতি">
+
+        <img
+        src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=900&q=80"
+        alt="রাজনীতি">
+
+        <div class="news-content">
+
+            <div class="news-category">
+                রাজনীতি
+            </div>
+
+            <div class="news-title">
+                রাজনৈতিক অঙ্গনের সর্বশেষ খবর
+            </div>
+
+            <div class="news-text">
+                রাজনৈতিক সংবাদ প্রকাশের আগে তথ্য যাচাই করে
+                দায়িত্বশীলভাবে সংবাদ পরিবেশনের লক্ষ্য জনমতের।
+            </div>
+
+            <div class="news-time">
+                আজ • জনমত ডেস্ক
+            </div>
+
+        </div>
+
+    </article>
+
+
+    <div class="no-result" id="noResult">
+        কোনো সংবাদ পাওয়া যায়নি।
+    </div>
+
+</main>
+
+
+<footer class="footer">
+
+    <strong>জনমত</strong>
+
+    <br>
+
+    সত্য • তথ্য • জনস্বার্থ
+
+    <br><br>
+
+    আপনার এলাকার সংবাদ, তথ্য ও অভিযোগ
+    আমাদের কাছে পাঠাতে পারেন।
+
+    <br>
+
+    © 2026 জনমত নিউজ
+
+</footer>
+
+
+<script>
+
+function setDate(){
+
+    const today = new Date();
+
+    const options = {
+        weekday:"long",
+        year:"numeric",
+        month:"long",
+        day:"numeric"
+    };
+
+    document.getElementById("date").innerText =
+        today.toLocaleDateString("bn-BD", options);
+}
+
+setDate();
+
+
+function filterNews(category){
+
+    const cards =
+        document.querySelectorAll(".news-card");
+
+    let found = false;
+
+    cards.forEach(card => {
+
+        if(category === "সব" ||
+           card.dataset.category === category){
+
+            card.style.display = "block";
+            found = true;
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+    document.getElementById("noResult").style.display =
+        found ? "none" : "block";
+}
+
+
+function searchNews(){
+
+    const search =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    const cards =
+        document.querySelectorAll(".news-card");
+
+    let found = false;
+
+    cards.forEach(card => {
+
+        const text =
+            card.innerText.toLowerCase();
+
+        if(text.includes(search)){
+
+            card.style.display = "block";
+            found = true;
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+    document.getElementById("noResult").style.display =
+        found ? "none" : "block";
+}
+
+</script>
+
+</body>
+</html>
